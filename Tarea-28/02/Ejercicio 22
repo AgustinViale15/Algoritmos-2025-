@@ -1,0 +1,18 @@
+def usar_la_fuerza(mochila, contador=0):
+    
+    if not mochila:
+        print("No se encontró un sable de luz en la mochila.")
+        return -1  
+
+    
+    if mochila[0] == "sable de luz":
+        print(f"Sable de luz encontrado después de sacar {contador} objetos.")
+        return contador
+
+    
+    return usar_la_fuerza(mochila[1:], contador + 1)
+
+
+mochila = ["comida", "botiquín", "cuerda", "sable de luz", "manta"]
+usar_la_fuerza(mochila)
+    
