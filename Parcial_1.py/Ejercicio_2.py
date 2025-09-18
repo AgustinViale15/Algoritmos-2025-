@@ -65,7 +65,7 @@ def Cambiar_Nombre():
     Lista_SuperHeroes.add_criterion("name", lambda x: x["name"])
     Lista_SuperHeroes.sort_by_criterion("name")
     
-    pos = Lista_SuperHeroes.search("Ant Man", "name")  # Devuelve posición o None
+    pos = Lista_SuperHeroes.search("Ant Man", "name")  
     if pos is not None:
         Lista_SuperHeroes[pos]["name"] = Nuevo_Name
         print("Nombre cambiado correctamente.")
@@ -77,7 +77,7 @@ def Cambiar_Nombre():
 def Mostrar_por_palabras_bio():
     print("Personajes con time-traveling o suit en su biografía:")
     for personaje in Lista_SuperHeroes:
-        bio = personaje["short_bio"].lower()  # convertir a minúsculas para búsqueda insensible a mayúsculas
+        bio = personaje["short_bio"].lower()  
         if "time-traveling" in bio or "suit" in bio:
             print(f"- {personaje['name']} : {personaje['short_bio']}")
 
