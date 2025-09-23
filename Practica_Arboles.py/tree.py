@@ -1,5 +1,6 @@
 from typing import Any, Optional
 from queue_ import Queue
+from collections import Counter
 
 class BinaryTree:
 
@@ -55,7 +56,7 @@ class BinaryTree:
         def __post_order(root):
             if root is not None:
                 __post_order(root.right)
-                print(root.value)
+                print(root.value,root.other_values)
                 __post_order(root.left)
 
         if self.root is not None:
@@ -262,6 +263,218 @@ class BinaryTree:
 
         if self.root is not None:
             __in_order_peso(self.root)
+    
+    def in_order_Villanos(self):
+        def __in_order_Villanos(root):
+            if root is not None:
+                __in_order_Villanos(root.left)
+                if root.other_values.get("es_heroe") == False: 
+                    print(root.value,root.other_values)
+
+                __in_order_Villanos(root.right)
+
+        if self.root is not None:
+            __in_order_Villanos(self.root)
+
+
+
+    def in_order_C(self):
+        def __in_order_C(root):
+            if root is not None:
+                __in_order_C(root.left)
+                if root.value[0] == ("C"):
+                    print(root.value,root.other_values)
+
+                __in_order_C(root.right)
+
+        if self.root is not None:
+            __in_order_C(self.root)
+
+    def in_order_heroes(self):
+        cont = 0
+        def __in_order_heroes(root):
+            nonlocal cont
+            if root is not None:
+                __in_order_heroes(root.left)
+                if root.other_values.get("es_heroe") == True:
+                    cont += 1
+                
+                __in_order_heroes(root.right)
+
+        
+        if self.root is not None:
+            __in_order_heroes(self.root)
+        print("Cantidad de superheroes: ",cont)
+    
+
+    def in_order_nodos(self):
+        cont = 0
+        def __in_order(root):
+            nonlocal cont
+            if root is not None:
+                __in_order(root.left)
+                cont += 1
+
+                
+                __in_order(root.right)
+
+        if self.root is not None:
+            __in_order(self.root)
+        print("Cantidad de nodos: ",cont)
+
+    def post_order_Heroes(self):
+        def __post_order(root):
+            if root is not None:
+                __post_order(root.right)
+                if root.other_values.get("es_heroe") == True:
+                    print(root.value,root.other_values)
+                __post_order(root.left)
+
+        if self.root is not None:
+            __post_order(self.root)
+
+    def in_order_Ej_23(self):
+        def __in_order_Ej_23(root):
+            if root:
+                __in_order_Ej_23(root.left)
+                print(f"Criatura: {root.value}, derrotado por: {root.other_values}")
+                __in_order_Ej_23(root.right)
+        
+        if self.root:
+            __in_order_Ej_23(self.root)
+
+
+
+    def in_order_derrotas(self):
+        
+        
+        derrotadores = []
+        
+        def __in_order_derrota(root):
+            if root is not None:
+                __in_order_derrota(root.left)
+                if root.other_values is not None and root.other_values != "-":
+                    derrotadores.append(root.other_values)
+                __in_order_derrota(root.right)
+        
+        __in_order_derrota(self.root)
+        
+        contador = Counter(derrotadores)
+        
+        top_3 = contador.most_common(3)
+        
+        
+        
+        for i, (derrotador, cantidad) in enumerate(top_3, 1):
+            print(f"{i}. {derrotador}: {cantidad} criatura(s) derrotada(s)")
+        
+        return top_3
+    
+    
+    
+    def in_order_Heracles(self):
+        criaturas_derrotadas = []
+        
+        def __in_order_Heracles(root):
+            if root is not None:
+                __in_order_Heracles(root.left)
+                if root.other_values is not None and root.other_values == "Heracles":
+                    criaturas_derrotadas.append(root.value)
+                __in_order_Heracles(root.right)
+        
+        __in_order_Heracles(self.root)
+        
+        
+        
+        if criaturas_derrotadas:
+            print(f"Heracles derrotó a {len(criaturas_derrotadas)} criaturas:")
+            for i, criatura in enumerate(criaturas_derrotadas, 1):
+                print(f"{i}. {criatura}")
+        else:
+            print("Heracles no derrotó a ninguna criatura en la lista.")
+        
+        return criaturas_derrotadas
+
+
+    def in_order_no_derrotas(self):
+        
+        
+        derrotadores = []
+        
+        def __in_order_no_derrotas(root):
+            if root is not None:
+                __in_order_no_derrotas(root.left)
+                if root.other_values == "-":
+                    derrotadores.append(root.value)
+                __in_order_no_derrotas(root.right)
+        
+        __in_order_no_derrotas(self.root)
+        
+        if derrotadores:
+            print(f"Criaturas no derrotadas {len(derrotadores)} :")
+            for i, criatura in enumerate(derrotadores, 1):
+                print(f"{i}. {criatura}")
+        
+        return derrotadores
+    
+    def search_by_partial_match(self, partial_name):
+        "Busca criaturas que contengan el texto partial_name en su nombre"
+        results = []
+        
+        def __search_partial(root, partial):
+            if root is not None:
+                __search_partial(root.left, partial)
+                
+                if partial.lower() in root.value.lower():
+                    results.append(root)
+                
+                __search_partial(root.right, partial)
+        
+        __search_partial(self.root, partial_name)
+        return results
+    
+
+    def listar_por_nivel(self):
+        "Recorrido por nivel "
+        if self.root is None:
+            print("El árbol está vacío")
+            return
+        
+        from collections import deque
+        cola = deque()
+        cola.append(self.root)
+        nivel_actual = 0
+        
+        print("Listado por Nivel")
+        
+        while cola:
+            nodos_en_nivel = len(cola)
+            print(f"\n Nivel {nivel_actual} ")
+            
+            for i in range(nodos_en_nivel):
+                nodo = cola.popleft()
+                
+                print(f"Criatura: {nodo.value}, Derrotado por: {nodo.other_values}")
+                
+                if nodo.left is not None:
+                    cola.append(nodo.left)
+                if nodo.right is not None:
+                    cola.append(nodo.right)
+            
+            nivel_actual += 1
+
+    def in_order_Heracles(self):
+        def __in_order_Heracles(root):
+            if root is not None:
+                __in_order_Heracles(root.left)
+                if root.other_values == ("Heracles"):
+                    print(root.value)
+                __in_order_Heracles(root.right)
+
+        if self.root is not None:
+            __in_order_Heracles(self.root)
+
+    
 
     
 

@@ -59,12 +59,6 @@ if pos is not None:
 arbol_binario.in_order()
 
 
-
-
-
-
-#4
-
 #C
 pos =arbol_binario.search("Yoda")
 if pos is not None:
