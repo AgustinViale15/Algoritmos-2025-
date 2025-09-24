@@ -2,7 +2,7 @@ from Lista import List
 
 class Numeros:
     def _init_(self, numeros):
-        self.numeros = numeros  # cambiamos a 'caracteres' para que coincida con _str_
+        self.numeros = numeros  
 
     def _str_(self):
         return f"{self.numeros}"

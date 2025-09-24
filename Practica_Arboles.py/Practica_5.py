@@ -1,12 +1,10 @@
 from tree import BinaryTree
 from random import choice
 
-# Crear el árbol
 arbol_binario_Nombre = BinaryTree()
 arbol_binario_Heroes = BinaryTree()
 arbol_binario_Villanos = BinaryTree()
 
-# Lista de personajes (corregí algunos nombres que parecían de otras sagas)
 Personajes_MCU = [
     "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow",
     "Hawkeye", "Thanos", "Loki", "Ultron", "Red Skull",
@@ -16,8 +14,7 @@ Personajes_MCU = [
 
 for nombre_personaje in Personajes_MCU:
     info = {
-        "es_heroe": choice([True, False])  # Esto asignará aleatoriamente
-        # Si quieres asignar específicamente, deberías hacerlo manualmente
+        "es_heroe": choice([True, False])  
     }
     arbol_binario_Nombre.insert(nombre_personaje, info)
 
