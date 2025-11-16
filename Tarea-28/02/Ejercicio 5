@@ -1,0 +1,25 @@
+def romano_a_decimal(romano):
+   
+    valores = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    total = 0          
+    anterior = 0        
+    for i in reversed(romano):
+        Valor = valores[i]
+        if Valor < anterior:
+            total -= Valor
+        else: 
+            total += Valor
+        anterior = Valor
+    return(total)
+   
+entrada = input("Ingrese un número romano: ").upper()
+print("Número decimal:", romano_a_decimal(entrada))
